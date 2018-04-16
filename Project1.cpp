@@ -1,6 +1,7 @@
 // Program to calculate the volume between two Bezier surfaces.
 
 #include <stdio.h>
+#include <fstream>
 #include <omp.h>
 #include "Project1.h"
 
@@ -67,6 +68,9 @@ int main( int argc, char *argv[ ] )
 	printf( " Peak Performance = %8.2lf MegaHeights/Sec\n", maxMegaHeights );
 	printf( "Average Performance = %8.2lf MegaHeights/Sec\n", avgMegaHeights );
 	printf( "The area of the Bezier surface is %8.10lf\n.", sum );
+	
+	std::ofstream dataFile("TrapezoidalRuleData.txt", std::ofstream::out | std::ofstream::app);
+	dataFile << NUMT << ", " << NUMNODES << ", " << maxMegaHeights << ", " << avgMegaHeights << "\n";
 	
 	return 0;
 	
