@@ -23,12 +23,12 @@ nodeLegend = [];
 
 for i=1:length(numNodes)
     
-    nodeLegend = [nodeLegend, strcat(string(numNodes(i)), " Nodes")];
+    nodeLegend = [nodeLegend, strcat(string(numNodes(i)^2), " Nodes")];
     
 end
 
 figure
-plot(numNodes,peakPerformance)
+plot(numNodes.^2,peakPerformance)
 xlabel('Number of Nodes')
 ylabel('Peak Performance, MegaHeights/Sec')
 legend(threadLegend,'Location','NorthEastOutside')
@@ -39,3 +39,9 @@ plot(threads,peakPerformance')
 xlabel('Number of Threads')
 ylabel('Peak Performance, MegaHeights/Sec')
 legend(nodeLegend,'Location','NorthEastOutside')
+
+ni = threads(2:end)';
+N = length(ni);
+Ti = peakPerformance(4,:).^-1;
+Fi = (ni./(ni-1)).*((Ti(1) - Ti(2:end))./Ti(1));
+F = (1/N)*sum(Fi);
